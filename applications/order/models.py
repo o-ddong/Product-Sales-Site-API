@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 from applications.billing.models import Billing
-from applications.billing.cert import User
+from applications.cert.models import User
 
 
 class Ordering(models.Model):

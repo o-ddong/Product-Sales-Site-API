@@ -4,7 +4,7 @@ from django.db import models
 from applications.base.models import BaseModel
 
 
-class Production(models.Model, BaseModel):
+class Production(BaseModel):
     price = models.IntegerField(verbose_name=("가격"))
     name = models.CharField(max_length=20, verbose_name=("상품 이름"))
     origin = models.CharField(max_length=20, verbose_name=("원산지"))
