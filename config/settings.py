@@ -44,7 +44,7 @@ PROJECT_APPS = [
     'applications.billing',
     'applications.order',
     'applications.produce',
-    'applications.user',
+    'applications.cert',
 ]
 
 THIRD_PARTY_APPS = [
