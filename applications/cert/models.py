@@ -20,3 +20,4 @@ class User(AbstractBaseUser, BaseModel):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
 
+
