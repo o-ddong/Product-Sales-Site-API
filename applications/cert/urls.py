@@ -16,3 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from applications.cert.views import UserCreateListMixins, UserDetailMixins
+
+urlpatterns = [
+    path('user/', UserCreateListMixins.as_view()),
+    path('user/<int:pk>', UserDetailMixins.as_view()),
+]
