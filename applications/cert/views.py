@@ -9,6 +9,9 @@ from applications.cert.serializer import UserCreateListSerializer, UserDetailSer
 
 
 class UserCreateListMixins(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    """
+    유저 생성 및 조회
+    """
     queryset = User.objects.all()
     serializer_class = UserCreateListSerializer
 
@@ -20,6 +23,9 @@ class UserCreateListMixins(mixins.ListModelMixin, mixins.CreateModelMixin, gener
 
 
 class UserDetailMixins(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+    """
+    유저 상세 조회 및 수정, 삭제
+    """
     queryset = User.objects.all()
     serializer_class = UserDetailSerializer
 
