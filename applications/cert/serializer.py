@@ -7,7 +7,7 @@ class UserCreateListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        exclude = ['id', 'last_login']
+        exclude = ['last_login', 'grade','created_at', 'updated_at']
 
 class UserDetailSerializer(serializers.ModelSerializer):
 
