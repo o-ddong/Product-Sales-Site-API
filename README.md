@@ -19,7 +19,7 @@ pip install -r requestments
 ```
 
 ### DB ERD
-![](../../../Fruitte_DB ERD.png)D
+![Fruitte_DB ERD](https://user-images.githubusercontent.com/71745798/193421617-bbb1843b-694c-43f5-be48-af3c4f16e2c0.png)
 
 
 ### API Docs.
