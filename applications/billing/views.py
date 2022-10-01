@@ -7,6 +7,7 @@ from applications.base.response import operation_deleted, operation_failure, cer
 from applications.billing.models import Product, Payment, History
 from applications.billing.serializer import ProductCreateListSerializer, ProductDetailSerializer, \
     PaymentCreateListSerializer, PaymentDetailSerializer, HistoryCreateListSerializer, HistoryDetailSerializer
+from applications.cert.models import User
 
 
 class ProductCreateListMixins(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
@@ -136,9 +137,15 @@ def admin_check(data):
     """
     관리자 권한 체크 용도
     """
-    if data.get('is_admin') == None:
+    try:
+        user_id = data.get('user')
+        user = User.objects.get(id=user_id)
+        flag = user.is_admin
+    except:
         return False
-    elif data.get('is_admin') == False:
+    if flag == None:
+        return False
+    elif flag == False:
         return False
     else:
         return True
