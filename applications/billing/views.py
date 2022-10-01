@@ -4,8 +4,9 @@ from django.shortcuts import render
 from rest_framework import mixins, generics
 
 from applications.base.response import operation_deleted, operation_failure, certification_failure
-from applications.billing.models import Product
-from applications.billing.serializer import ProductCreateListSerializer, ProductDetailSerializer
+from applications.billing.models import Product, Payment
+from applications.billing.serializer import ProductCreateListSerializer, ProductDetailSerializer, \
+    PaymentCreateListSerializer, PaymentDetailSerializer
 
 
 class ProductCreateListMixins(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
@@ -49,6 +50,44 @@ class ProductDetailMixins(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mi
         data = request.data.copy()
         if not admin_check(data):
             return certification_failure
+        response = self.destroy(request, *args, **kwargs)
+        if response.status_code == 204:
+            return operation_deleted
+        else:
+            return operation_failure
+
+class PaymentCreateListMixins(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    """
+    결제 내역 생성 및 조회
+    - 일반 유저 : 조회 및 생성 모두 가능
+    - 관리자 : 조회 및 생성 모두 가능
+    """
+    queryset = Payment.objects.all()
+    serializer_class = PaymentCreateListSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request)
+
+
+class PaymentDetailMixins(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+    """
+    결제 내역 상세 조회 및 수정, 삭제
+    - 일반 유저 : 상세 조회, 수정, 삭제 모두 가능
+    - 관리자 : 상세 조회, 수정, 삭제 모두 가능
+    """
+    queryset = Payment.objects.all()
+    serializer_class = PaymentDetailSerializer
+
+    def get(self, request, pk, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
         response = self.destroy(request, *args, **kwargs)
         if response.status_code == 204:
             return operation_deleted
