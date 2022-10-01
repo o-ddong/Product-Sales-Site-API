@@ -42,8 +42,6 @@ DJANGO_APPS = [
 PROJECT_APPS = [
     'applications.base',
     'applications.billing',
-    'applications.order',
-    'applications.produce',
     'applications.cert',
 ]
 
