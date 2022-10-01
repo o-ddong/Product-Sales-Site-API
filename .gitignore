@@ -132,7 +132,7 @@ celerybeat.pid
 *.sage.py
 
 # migrations
-/migrations
+migrations/
 *_initial.py
 
 # Environments
