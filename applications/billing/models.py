@@ -24,6 +24,7 @@ class Product(BaseModel):
     ]
 
     id = models.BigAutoField(primary_key=True, verbose_name=("상품 번호"))
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=("회원 번호"))
     name = models.CharField(max_length=20, verbose_name=("상품 이름"))
     price = models.CharField(max_length=20, verbose_name=("상품 가격"))
     description = models.CharField(max_length=255, verbose_name=("상품 설명"))
@@ -41,7 +42,7 @@ class Payment(models.Model):
 
     id = models.BigAutoField(primary_key=True, verbose_name=("결제 관리 번호"))
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=("회원 번호"))
-    address = models.CharField(max_length=100, verbose_name=("배송 주소"))
+    address = models.CharField(max_length=100, null=False, verbose_name=("배송 주소"))
     requirement = models.CharField(max_length=100, verbose_name=("배송 요청 사항"))
     payment_method = models.IntegerField(choices=PAYMENT_METHOD_CHOICES, verbose_name=("배송 방법"))
     price = models.IntegerField(verbose_name=("총 가격"))
