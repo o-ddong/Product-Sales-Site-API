@@ -3,7 +3,11 @@ from django.db import models
 # Create your models here.
 from applications.base.models import BaseModel
 
+<<<<<<< HEAD
 """ 유저 관리 테이블 """
+=======
+
+>>>>>>> fa7e7de759d79059af8920d620a2bb2154b9a546
 class User(BaseModel):
     id = models.BigAutoField(primary_key=True, verbose_name=("회원 번호"))
     email = models.CharField(max_length=255, null=True, verbose_name=("이메일"))
