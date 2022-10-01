@@ -4,9 +4,9 @@ from django.shortcuts import render
 from rest_framework import mixins, generics
 
 from applications.base.response import operation_deleted, operation_failure, certification_failure
-from applications.billing.models import Product, Payment
+from applications.billing.models import Product, Payment, History
 from applications.billing.serializer import ProductCreateListSerializer, ProductDetailSerializer, \
-    PaymentCreateListSerializer, PaymentDetailSerializer
+    PaymentCreateListSerializer, PaymentDetailSerializer, HistoryCreateListSerializer, HistoryDetailSerializer
 
 
 class ProductCreateListMixins(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
@@ -94,6 +94,43 @@ class PaymentDetailMixins(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mi
         else:
             return operation_failure
 
+class HistoryCreateListMixins(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    """
+    주문 내역 생성 및 조회
+    - 일반 유저 : 조회 및 생성 모두 가능
+    - 관리자 : 조회 및 생성 모두 가능
+    """
+    queryset = History.objects.all()
+    serializer_class = HistoryCreateListSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request)
+
+
+class HistoryDetailMixins(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+    """
+    주문 내역 조회 및 수정, 삭제
+    - 일반 유저 : 상세 조회, 수정, 삭제 모두 가능
+    - 관리자 : 상세 조회, 수정, 삭제 모두 가능
+    """
+    queryset = History.objects.all()
+    serializer_class = HistoryDetailSerializer
+
+    def get(self, request, pk, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        response = self.destroy(request, *args, **kwargs)
+        if response.status_code == 204:
+            return operation_deleted
+        else:
+            return operation_failure
 
 def admin_check(data):
     """
