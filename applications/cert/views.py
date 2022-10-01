@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework import mixins, generics
 
+from applications.base.response import operation_deleted, operation_failure
 from applications.cert.models import User
 from applications.cert.serializer import UserCreateListSerializer, UserDetailSerializer
 
@@ -29,4 +30,8 @@ class UserDetailMixins(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixin
         return self.update(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+        response = self.destroy(request, *args, **kwargs)
+        if response.status_code == 204:
+            return operation_deleted
+        else:
+            return operation_failure
