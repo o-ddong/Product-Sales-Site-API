@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.urls import path
 
-from applications.billing.views import ProductCreateListMixins, ProductDetailMixins
+from applications.billing.views import ProductCreateListMixins, ProductDetailMixins, PaymentCreateListMixins, \
+    PaymentDetailMixins
 
 urlpatterns = [
     path('product/', ProductCreateListMixins.as_view()),
     path('product/<int:pk>', ProductDetailMixins.as_view()),
+    path('payment/', PaymentCreateListMixins.as_view()),
+    path('payment/<int:pk>', PaymentDetailMixins.as_view()),
 ]
