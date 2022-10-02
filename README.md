@@ -23,8 +23,9 @@ python manage.py runserver
 ```
 
 ### DB ERD
-![Fruitte_DB ERD](https://user-images.githubusercontent.com/71745798/193421617-bbb1843b-694c-43f5-be48-af3c4f16e2c0.png)
+<a href="https://dbdiagram.io/d/633821da7b3d2034ffffb9e9">DB ERD 상세 내역입니다.</a>
 
+![](../../../Fruitte_DB ERD.png)
 
 ### API Docs.
 https://tulip-bobolink-851.notion.site/Fruitte-API-Docs-402084ece25d4ab7980d4215b556a1e4
