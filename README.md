@@ -13,9 +13,13 @@ source /venv/bin/activate
 ```
 
 ### requirements 설치
-requirements 파일 경로가 있는 곳에서 다음과 같이 실행해주면 된다.
 ```
 pip install -r requestments
+```
+
+### 서버 실행
+```
+python manage.py runserver
 ```
 
 ### DB ERD
