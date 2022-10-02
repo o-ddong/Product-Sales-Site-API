@@ -12,8 +12,8 @@ python -m venv venv
 source /venv/bin/activate
 ```
 
-### requestments 설치
-request 파일 경로가 있는 곳에서 다음과 같이 실행해주면 된다.
+### requirements 설치
+requirements 파일 경로가 있는 곳에서 다음과 같이 실행해주면 된다.
 ```
 pip install -r requestments
 ```
